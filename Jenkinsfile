@@ -5,7 +5,7 @@ pipeline {
         stage('lint') {
             steps {
                 sh 'docker run -v $(pwd):/usr/src/app zenika/alpine-node yarn'
-                sh 'docker run -v $(pwd):/usr/src/app zenika/alpine-node yarn lint'
+                sh 'docker run -e CI=true -v $(pwd):/usr/src/app zenika/alpine-node yarn test'
             }
         }
         stage('deploy') {
