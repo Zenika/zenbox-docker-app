@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('lint') {
             steps {
-                sh "echo ${env.BRANCH_NAME}"
+                sh 'printenv'
+                sh "echo ${BRANCH_NAME}"
                 sh '#!/bin/bash -xe echo $BRANCH_NAME'
                 sh 'echo ${git rev-parse --abbrev-ref HEAD}'
                 sh 'echo ${WORKSPACE}'
