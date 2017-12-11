@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage('lint') {
             steps {
-                sh 'echo ${BRANCH_NAME}'
-                sh 'echo ${GIT_LOCAL_BRANCH}'
+                sh 'echo ${env.BRANCH_NAME}'
+                sh '#!/bin/bash echo $BRANCH_NAME'
+                sh 'echo ${env.GIT_LOCAL_BRANCH}'
+                sh 'echo ${git rev-parse --abbrev-ref HEAD}'
                 sh 'echo ${WORKSPACE}'
                 sh 'docker run -v $JENKINS_INSTALL/jenkins/workspace/zenbox-docker-app:/usr/src/app zenika/alpine-node yarn'
                 sh 'docker run -e CI=true -v $JENKINS_INSTALL/jenkins/workspace/zenbox-docker-app:/usr/src/app zenika/alpine-node yarn test'
