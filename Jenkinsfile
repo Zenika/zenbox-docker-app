@@ -11,7 +11,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'docker build -t local/application:${BRANCH_NAME} $$JENKINS_INSTALL$PWD'
+                sh 'docker build -t local/application:${BRANCH_NAME} $JENKINS_INSTALL$PWD'
                 sh 'docker-compose -p ${BRANCH_NAME}-demo up -d'
             }
         }
