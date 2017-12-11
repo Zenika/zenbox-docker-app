@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('lint') {
             steps {
-                sh 'docker run -v $(pwd):/usr/src/app zenika/alpine-node yarn'
-                sh 'docker run -e CI=true -v $(pwd):/usr/src/app zenika/alpine-node yarn test'
+                sh 'echo $BRANCH_NAME'
+                sh 'docker run -v $JENKINS_INSTALL/jenkins/workspace/zenbox-docker-app:/usr/src/app zenika/alpine-node yarn'
+                sh 'docker run -e CI=true -v $JENKINS_INSTALL/jenkins/workspace/zenbox-docker-app:/usr/src/app zenika/alpine-node yarn test'
             }
         }
         stage('deploy') {
