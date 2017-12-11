@@ -9,6 +9,11 @@ pipeline {
                 sh 'docker run -e CI=true -v $JENKINS_INSTALL$PWD:/usr/src/app zenika/alpine-node yarn test'
             }
         }
+        stage('build') {
+            steps {
+                sh 'docker run -e CI=true -v $JENKINS_INSTALL$PWD:/usr/src/app zenika/alpine-node yarn build'
+            }
+        }
         stage('deploy') {
             steps {
                 sh 'docker build -t local/application:${BRANCH_NAME} $JENKINS_INSTALL$PWD'
