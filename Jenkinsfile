@@ -16,7 +16,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'docker build --compress -t local/application:${BRANCH_NAME} "$PWD"'
+                sh 'docker build -t local/application:${BRANCH_NAME} $PWD'
                 sh 'docker-compose -p ${BRANCH_NAME}-demo up -d'
             }
         }
